@@ -9,8 +9,6 @@
 # goes from [0] x n to [1] x n, that is input string is a
 # constant length of n and does not vary.
 
-from random import choice
-
 # classical algorithm worst case is 2^(n - 1）+ 1, in the case
 # that 2^n-1 inputs returns a constant output. The
 # "2^(n - 1）+ 1"th input would decide if the input function is
@@ -18,19 +16,18 @@ from random import choice
 
 def deutschjozsa(func, n):
 
-    s = func(''.join('0' for _ in range(n - len(bin(0)[2:]))) + bin(0)[2:])
+    # test the first input: {0}^n 
+    s = func(''.join('0' for _ in range(n - len(bin(0)[2:])) + bin(0)[2:]))
 
     # iterate to worst case perf 2^n-1
-    for x in range(1, ((2 << (n-1)) + 1)):
+    for x in range(1, ((1 << (n-1)) + 1)):
         
         # XOR the output with balance
         cur = func(''.join('0' for _ in range(n - len(bin(0)[2:]))) + bin(x)[2:])
 
         if cur != s:
             return 'balanced'
-    
+        
+        cur = s
+
     return 'constant'
-
-# random input generator
-input = ''.join(choice(0,1) for _ in range(0, n))
-
