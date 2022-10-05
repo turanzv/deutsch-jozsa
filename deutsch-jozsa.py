@@ -23,7 +23,7 @@ def deutschjozsa(func, n):
     for x in range(1, ((1 << (n-1)) + 1)):
         
         # XOR the output with balance
-        cur = func(''.join('0' for _ in range(n - len(bin(0)[2:]))) + bin(x)[2:])
+        cur = func(''.join('0' for _ in range(n - len(bin(x)[2:]))) + bin(x)[2:])
 
         if cur != s:
             return 'balanced'
