@@ -28,6 +28,6 @@ def deutschjozsa(func, n):
         if cur != s:
             return 'balanced'
         
-        cur = s
+        s = cur
 
     return 'constant'
